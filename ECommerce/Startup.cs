@@ -50,14 +50,14 @@ namespace ECommerce
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Products}/{action=Index}/{id?}");
+                /*first page display when run it is a Product             */
             });
 
             AppDbInitializer.Seed(app);

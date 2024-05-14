@@ -69,3 +69,63 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/*My Products Style*/
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0,0.0,0.2);
+    max-width: 320px;
+    margin: auto;
+    text-align: center;
+    font-family: Arial;
+    border-radius: 30px;
+    height:610px;
+}
+
+.price {
+    color: grey;
+    font-size: 22px;
+}
+
+.card img {
+    align-self: center;
+    padding-top:15px;
+}
+
+
+.card button {
+    border: none;
+    padding: 12px;
+    color: white;
+    background-color: rgba(0,0.0,0.2);
+    text-align: center;
+    cursor: pointer;
+    width: 50%;
+    font-size: 18px;
+    border-radius: 30px;
+    align-self: center;
+}
+.card button:hover {
+        opacity: 0.7;
+    }
+
+.dot {
+    height: 25px;
+    width: 25px;
+    border-color: black;
+    border: 5px solid;
+    border-width: thin;
+    margin-right: 20px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.ProColorDisplay {
+    display: inline; 
+    height: 25px;
+    width: 40px;
+    
+}
+
+
+
+
+

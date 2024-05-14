@@ -41,6 +41,11 @@ namespace ECommerce.Data
                        {
                            Name="C3",
                            Description="C3"
+                       },
+                       new Category()
+                       {
+                           Name="C4",
+                           Description="C4"
                        }
                     };
                     context.Categories.AddRange(categorias);
@@ -55,20 +60,26 @@ namespace ECommerce.Data
                     {
                        new Product()
                        {
-                           Name="P1",Description="D1",Price=150,ImageURL="https...",
-                           ProductColor=ProductColor.Red,CategoryId=1
+                           Name="SWAROVISKI-1",Description="Metal bracelet, golden yellow colour",Price=150,ImageURL="~/image/GoldWatch.jpg",
+                           ProductColor=ProductColor.gold,CategoryId=4
                        },
                        new Product()
                        {
-                           Name="P2",Description="D2",Price=200,ImageURL="https...",
-                           ProductColor=ProductColor.Green,CategoryId=2
+                           Name="SWAROVISKI-2",Description="Metal bracelet, silver colour",Price=200,ImageURL="~/image/SilverWatch.jpg",
+                           ProductColor=ProductColor.silver,CategoryId=5
                        },
 
                        new Product()
                        {
-                           Name="P3",Description="D3",Price=300,ImageURL="https...",
-                           ProductColor=ProductColor.Yellow,CategoryId=3
+                           Name="SWAROVISKI-3",Description="Leather bracelet, golden yellow colour",Price=300,ImageURL="~/image/WhiteWatch.jpg",
+                           ProductColor=ProductColor.white,CategoryId=6
+                       },
+                       new Product()
+                       {
+                           Name="SWAROVISKI-4",Description="Metal bracelet, black colour",Price=300,ImageURL="~/image/BlackWatch.jpg",
+                           ProductColor=ProductColor.black,CategoryId=7
                        }
+
                     };
                     context.Products.AddRange(Products);
                     context.SaveChanges();
