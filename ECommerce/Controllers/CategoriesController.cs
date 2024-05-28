@@ -77,12 +77,12 @@ namespace ECommerce.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CategoryId,Name,Description")] Category category)
+        public async Task<IActionResult> Edit(Category category)
         {
-            if (id != category.CategoryId)
-            {
-                return View("NotFound");
-            }
+            //if (id != category.Id)
+            //{
+            //    return View("NotFound");
+            //}
 
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace ECommerce.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    // Handle exceptionq
+                    return View("NotFound");
                 }
                 return RedirectToAction(nameof(Index));
             }
