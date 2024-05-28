@@ -1,4 +1,5 @@
 using ECommerce.Data;
+using ECommerce.Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -31,6 +32,7 @@ namespace ECommerce
                 options.UseSqlServer(Configuration.GetConnectionString("DefultConnection"));
             });
             services.AddControllersWithViews();
+            services.AddScoped<ICategoryServices, CategoryServices>();//this work if any one use ICategoryServices the scop create CategoryServices object 
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +53,6 @@ namespace ECommerce
 
             app.UseRouting();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -59,6 +60,7 @@ namespace ECommerce
                     pattern: "{controller=Products}/{action=Index}/{id?}");
                 /*first page display when run it is a Product             */
             });
+            
 
             AppDbInitializer.Seed(app);
         }

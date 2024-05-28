@@ -1,4 +1,4 @@
-﻿namespace ECommerce.Data
+﻿namespace ECommerce.Enums.Data
 {
     public enum ProductColor
     {

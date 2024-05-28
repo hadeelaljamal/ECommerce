@@ -1,4 +1,5 @@
 ﻿using ECommerce.Models;
+using ECommerce.Enums.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
@@ -60,24 +61,24 @@ namespace ECommerce.Data
                     {
                        new Product()
                        {
-                           Name="SWAROVISKI-1",Description="Metal bracelet, golden yellow colour",Price=150,ImageURL="~/image/GoldWatch.jpg",
-                           ProductColor=ProductColor.gold,CategoryId=4
+                           Name="SWAROVISKI-1",Description="Metal bracelet, golden yellow colour",Price=150,ImageURL="image/GoldWatch.jpg",
+                           ProductColor=ProductColor.gold,CategoryId=9
                        },
                        new Product()
                        {
-                           Name="SWAROVISKI-2",Description="Metal bracelet, silver colour",Price=200,ImageURL="~/image/SilverWatch.jpg",
-                           ProductColor=ProductColor.silver,CategoryId=5
+                           Name="SWAROVISKI-2",Description="Metal bracelet, silver colour",Price=200,ImageURL="image/SilverWatch.jpg",
+                           ProductColor=ProductColor.silver,CategoryId=10
                        },
 
                        new Product()
                        {
-                           Name="SWAROVISKI-3",Description="Leather bracelet, golden yellow colour",Price=300,ImageURL="~/image/WhiteWatch.jpg",
-                           ProductColor=ProductColor.white,CategoryId=6
+                           Name="SWAROVISKI-3",Description="Leather bracelet, golden yellow colour",Price=300,ImageURL="image/WhiteWatch.jpg",
+                           ProductColor=ProductColor.white,CategoryId=11
                        },
                        new Product()
                        {
-                           Name="SWAROVISKI-4",Description="Metal bracelet, black colour",Price=300,ImageURL="~/image/BlackWatch.jpg",
-                           ProductColor=ProductColor.black,CategoryId=7
+                           Name="SWAROVISKI-4",Description="Metal bracelet, black colour",Price=300,ImageURL="image/BlackWatch.jpg",
+                           ProductColor=ProductColor.black,CategoryId=12
                        }
 
                     };
