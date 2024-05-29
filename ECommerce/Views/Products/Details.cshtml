@@ -1,0 +1,24 @@
+﻿@model Product
+@{
+    ViewData["Title"] = $"Details of Product {@Model.Name}";
+}
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <div class="card">
+            @* <img src="@Url.Content(@Model.ImageURL)" alt="@Model.Name" style="width:90%;height:300px;"/>  this way is ok *@
+            <img src="@Model.ImageURL" alt="@Model.Name" style="width:90%;height:300px;" /> @*and this is ok if the bath in db not start with ~/*@
+            <h1>@Model.Name</h1>
+            <p>@Model.Price.ToString("c")</p>
+            <p>@Model.Description</p>
+            <p>
+                <span class="dot" style="background-color: @Model.ProductColor;"> </span>
+                <span class="ProColorDisplay">@Model.ProductColor</span>
+            </p>
+            <p>@Model.Category.Name</p>
+            <button>
+                <i class="fas fa-regular fa-shopping-basket mr-2"></i>
+                Add To Cart
+            </button>
+        </div>
+    </div>
+</div>

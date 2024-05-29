@@ -11,8 +11,19 @@
     {
         <div class="col-md-3">
             <div class="card">
+                <a asp-action="Delete" asp-route-id="@item.Id">
+
+                    <input type="submit" value="Delete" class="btn btn-outline-danger"
+                           onclick="return confirm('Are You Sure Want To Delete This Product?')" />
+                </a>
+                <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">
+                  <i class="fas fa-regular fa-pencil"></i>
+                </a>
                 @* <img src="@Url.Content(@item.ImageURL)" alt="@item.Name" style="width:90%;height:300px;"/>  this way is ok *@
-                <img src="@item.ImageURL" alt="@item.Name" style="width:90%;height:300px;"/> @*and this is ok if the bath in db not start with ~/*@
+                <a asp-action="Details" asp-route-id="@item.Id">
+                    <img src="@item.ImageURL" alt="@item.Name" style="width:90%;height:300px;" /> @*and this is ok if the bath in db not start with ~/*@
+                </a>
+               
                 <h1>@item.Name</h1>
                 <p>@item.Price.ToString("c")</p>
                 <p>@item.Description</p>
@@ -21,15 +32,19 @@
                     <span class="ProColorDisplay">@item.ProductColor</span>
                 </p>
                 <p>@item.Category.Name</p>
-                <button>Add To Cart</button>
+                <button>
+                    <i class="fas fa-regular fa-shopping-basket mr-2"></i>
+                    Add To Cart
+                </button>
             </div>
         </div>
     }
 
 </div>
+@await Html.PartialAsync("_CreateItem", "Products")
 
 @* رح اضيف ال 
-style
+styl e
 داخل ملف ال 
 site.css
 بال

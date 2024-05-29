@@ -1,5 +1,6 @@
 ﻿using ECommerce.Data.Base;
 using ECommerce.Enums.Data;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ECommerce.Models
@@ -7,9 +8,19 @@ namespace ECommerce.Models
     public class Product : IBaseEntity
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Name Is Required")]
+        [StringLength(10, ErrorMessage = "This {0} Is Spasefic Between {2},{1}", MinimumLength = 5)]
+        [Display(Name = "Product Name")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Description Is Required")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Price Is Required")]
         public double Price { get; set; }
+
+        [Required(ErrorMessage = "ImageURL Is Required")]
         public string ImageURL { get; set; }
 
         /*Since colors are something fixed and known that do not change,

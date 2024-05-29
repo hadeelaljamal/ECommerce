@@ -33,6 +33,7 @@ namespace ECommerce
             });
             services.AddControllersWithViews();
             services.AddScoped<ICategoryServices, CategoryServices>();//this work if any one use ICategoryServices the scop create CategoryServices object 
+            services.AddScoped<IProductServices, ProductServices>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

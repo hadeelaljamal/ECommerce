@@ -30,8 +30,8 @@
                         </li>
                     </ul>
 
-                    <form class="form-inline" style="padding-right30px;">
-                        <input type="text" class="form-control" placeholder="Shearch here..." />
+                    <form class="form-inline" style="padding-right30px;" asp-action="Index" asp-controller="Products">
+                        <input name="searchTerm" type="text" class="form-control" placeholder="Shearch here..." autocomplete="off"/>
                         <button type="submit" class="btn btn-outline-success">
                             <i class="fas fa-regular fa-search"></i>
                         </button>
