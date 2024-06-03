@@ -13,5 +13,9 @@ namespace ECommerce.Data
 
         public DbSet<Category>Categories { get; set; } //here I make Renaming for Category to Categories Table To use it in this name in the Project
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+
     }
 }

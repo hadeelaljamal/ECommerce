@@ -61,24 +61,24 @@ namespace ECommerce.Data
                     {
                        new Product()
                        {
-                           Name="SWAROVISKI-1",Description="Metal bracelet, golden yellow colour",Price=150,ImageURL="image/GoldWatch.jpg",
-                           ProductColor=ProductColor.gold,CategoryId=9
+                           Name="SWAROVISKI-1",Description="Metal bracelet, golden yellow colour",Price=150,ImageURL="/image/GoldWatch.jpg",
+                           ProductColor=ProductColor.gold,CategoryId=1
                        },
                        new Product()
                        {
-                           Name="SWAROVISKI-2",Description="Metal bracelet, silver colour",Price=200,ImageURL="image/SilverWatch.jpg",
-                           ProductColor=ProductColor.silver,CategoryId=10
+                           Name="SWAROVISKI-2",Description="Metal bracelet, silver colour",Price=200,ImageURL="/image/SilverWatch.jpg",
+                           ProductColor=ProductColor.silver,CategoryId=2
                        },
 
                        new Product()
                        {
-                           Name="SWAROVISKI-3",Description="Leather bracelet, golden yellow colour",Price=300,ImageURL="image/WhiteWatch.jpg",
-                           ProductColor=ProductColor.white,CategoryId=11
+                           Name="SWAROVISKI-3",Description="Leather bracelet, golden yellow colour",Price=300,ImageURL="/image/WhiteWatch.jpg",
+                           ProductColor=ProductColor.white,CategoryId=3
                        },
                        new Product()
                        {
-                           Name="SWAROVISKI-4",Description="Metal bracelet, black colour",Price=300,ImageURL="image/BlackWatch.jpg",
-                           ProductColor=ProductColor.black,CategoryId=12
+                           Name="SWAROVISKI-4",Description="Metal bracelet, black colour",Price=300,ImageURL="/image/BlackWatch.jpg",
+                           ProductColor=ProductColor.black,CategoryId=4
                        }
 
                     };
