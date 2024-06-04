@@ -1,9 +1,10 @@
 ﻿using ECommerce.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Data
 {
-    public class ECommerceDbContext:DbContext
+    public class ECommerceDbContext:IdentityDbContext<ApplicationUser>
     {
         // Type ctor shortcut to create the constructor
         public ECommerceDbContext(DbContextOptions<ECommerceDbContext>options):base(options)

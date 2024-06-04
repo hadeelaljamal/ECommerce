@@ -1,7 +1,9 @@
 ﻿//using AspNetCore;
 using ECommerce.Data;
 using ECommerce.Data.Services;
+using ECommerce.Data.Static;
 using ECommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
@@ -11,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class CategoriesController : Controller
     {
         private readonly ICategoryServices _services; 

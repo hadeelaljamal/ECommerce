@@ -1,0 +1,38 @@
+﻿@using ECommerce.Data.ViewModels
+@model LoginVM
+@{
+    ViewData["Titel"] = "Login Page";
+}
+<div class="row">
+    <div class="col-md-5 offset-3">
+        <h4>Log In Your Account</h4>
+      
+                <form asp-action="Login">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="EmailAddress"></label>
+                        <input class="form-control" asp-for="EmailAddress" autocomplete="off" />
+                        <span class="text-danger" asp-validation-for="EmailAddress"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Password"></label>
+                        <input class="form-control" asp-for="Password" autocomplete="off" />
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                    </div>
+
+                <div class="form-group">
+                    <input class="btn btn-outline-success float-right" type="submit" value="Login" />
+@*                     <i class="fas fa-regular fa-arrow-right-to-bracket"></i>
+ *@                    <a class="btn btn-outline-secondary" asp-action="Register">Register</a>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

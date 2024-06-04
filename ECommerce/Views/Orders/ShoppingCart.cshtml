@@ -55,11 +55,15 @@
                     <i class="fas fa-regular fa-refresh mr-2"></i>
                     Continue Shopping
                 </a>
-                <a class="btn btn-outline-success" asp-controller="Orders" asp-action="CompleteOrder">
+                @if(User.Identity.IsAuthenticated && Model.Count()>0)
+                {
+                    <b>|</b>
+                 <div id="paypal-button"> </div>
+                }
+                @* <a class="btn btn-outline-success" asp-controller="Orders" asp-action="CompleteOrder">
                     <i class="fas fa-regular fa-check mr-2"></i>
                     Complete Order
-                </a>
-
+                </a> *@
             </div>
         </div>
     </div>

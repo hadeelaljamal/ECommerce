@@ -22,14 +22,18 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
+                        @if (Context.User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="Index">Category</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Product</a>
                         </li>
+                  
+                    } 
                     </ul>
-
                     <form class="form-inline" style="padding-right30px;" asp-action="Index" asp-controller="Products">
                         <input name="searchTerm" type="text" class="form-control" placeholder="Shearch here..." autocomplete="off"/>
                         <button type="submit" class="btn btn-outline-success">
@@ -39,18 +43,9 @@
                     <ul class="navbar-nav mr-2">
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
-                    <div class="dropdown">
-                        <button class="btn btn-outline-success dropdown-toggle" id="profile-btn" data-toggle="dropdown">
-                            <i class="fas fa-person"></i> Hello,...
-                        </button>
-                        <div class="dropdown-menu" area-labledby="profile-btn">
-                           
-                                <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
-                                    <i class="fas fa- reguler fa-list-check"></i> Orders
-                                </a>
-                           
-                        </div>
-                    </div>
+
+                    @*Partial View*@
+                    <partial name="_Identity" />
                 </div>
             </div>
         </nav>

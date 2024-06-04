@@ -11,14 +11,18 @@
     {
         <div class="col-md-3">
             <div class="card">
-                <a asp-action="Delete" asp-route-id="@item.Id">
+                @if (Context.User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                {
 
-                    <input type="submit" value="Delete" class="btn btn-outline-danger"
-                           onclick="return confirm('Are You Sure Want To Delete This Product?')" />
+                    <a asp-action="Delete" asp-route-id="@item.Id">
+
+                        <input type="submit" value="Delete" class="btn btn-outline-danger"
+                        onclick="return confirm('Are You Sure Want To Delete This Product?')" />
+                    </a>
+                    <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">
+                        <i class="fas fa-regular fa-pencil"></i>
                 </a>
-                <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">
-                  <i class="fas fa-regular fa-pencil"></i>
-                </a>
+                }
                 @* <img src="@Url.Content(@item.ImageURL)" alt="@item.Name" style="width:90%;height:300px;"/>  this way is ok *@
                 <a asp-action="Details" asp-route-id="@item.Id">
                     <img src="@item.ImageURL" alt="@item.Name" style="width:90%;height:300px;" /> @*and this is ok if the bath in db not start with ~/*@

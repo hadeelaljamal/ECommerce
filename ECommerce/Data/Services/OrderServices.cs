@@ -13,14 +13,19 @@ namespace ECommerce.Data.Services
         {
             _context = context;
         }
-        public async Task<List<Order>> GetOrderByUserIdAsync(string userId)
+        public async Task<List<Order>> GetOrderAndRoleByUserIdAsync(string userId, string role)
         {
             var order = await _context.Orders
                 .Include(x=>x.OrderItems)
                 .ThenInclude(x=>x.Product)
-                .Where(x=>x.UserId == userId)   
+                .Include(x=>x.User)
                 .ToListAsync();
-                 return order;
+                if (role != "Admin")
+            {
+                order = order.Where(x => x.UserId == userId).ToList();
+
+            }
+                return order;
         }
 
         public async Task StoreOrderAsync(List<ShoppingCartItem> items, string userId)
