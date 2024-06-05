@@ -58,7 +58,7 @@
                 @if(User.Identity.IsAuthenticated && Model.Count()>0)
                 {
                     <b>|</b>
-                 <div id="paypal-button"> </div>
+                    <div id="payapl-button"></div>
                 }
                 @* <a class="btn btn-outline-success" asp-controller="Orders" asp-action="CompleteOrder">
                     <i class="fas fa-regular fa-check mr-2"></i>
@@ -68,3 +68,43 @@
         </div>
     </div>
 </div>
+@section Scripts {
+    <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+    <script>
+        var _total = @Html.Raw(ViewBag.Total);
+        paypal.Button.render({
+            //Configure Environment
+            env: 'sandbox',
+            client: {
+                sandbox: 'AfNy9WIhIW0zT-gb1Yj1DvMKte21EC1JlNtcJczmqmkaH_m1SIAoxpZrdV6VLZlPCHlhZHjGk4aqYkL8'
+            },
+            //Customize Button (optional)
+            locale: 'en_US',
+            style: {
+                color: 'gold',
+                size: 'small',
+                shape: 'pill'
+            },
+            //Enable pay now checkout flow (optional)
+            commit: true,
+            //Setup a Payment
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    transactions: [{
+                        amount: {
+                            total: _total,
+                            currency: 'USD'
+                        }
+                    }]
+                });
+            },
+            //Excute The Payment
+            onAuthorize: function (data, actions) {
+                return actions.payment.get().then(function () {
+                    var url = '@Url.Action("CompleteOrder", "Orders", new { })';
+                    window.location.href = url;
+                });
+            }
+        }, '#payapl-button')
+    </script>
+}
