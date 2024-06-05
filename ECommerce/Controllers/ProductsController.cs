@@ -3,8 +3,11 @@ using ECommerce.Data.Services;
 using ECommerce.Data.Static;
 using ECommerce.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,16 +20,18 @@ namespace ECommerce.Controllers
         //private readonly ECommerceDbContext _context;
         private readonly IProductServices _services;
         private readonly ICategoryServices _categoryServices;
+        private readonly IWebHostEnvironment _webHost;
 
 
         //public ProductsController(ECommerceDbContext context)
         //{
         //    _context=context;
         //}
-        public ProductsController(IProductServices services, ICategoryServices categoryServices)
+        public ProductsController(IProductServices services, ICategoryServices categoryServices ,IWebHostEnvironment webHost)
         {
             _services = services;
             _categoryServices = categoryServices;
+            _webHost = webHost;
         }
         /*public IActionResult Index()    //enhance this code its a Legacy code wich mean The request that is emitted will be one after the other
          / يعني الريكويست بتكون ورا بعض لما يوصلني الريسبونس بتنفذ الريكويست يلي بعده و هالشي بياخد وقت طويل لما يكون حجم الداتا عندي كبير /مش احسن شيء للبيرفورمنس
@@ -73,6 +78,19 @@ namespace ECommerce.Controllers
         {
            if(ModelState.IsValid)
             {
+                
+                if (product.ProductPicture != null)
+                {
+                    var pictureName = $"{Guid.NewGuid()} - {product.ProductPicture.FileName}";
+                    var src = "/image/" + pictureName;
+                    var path = Path.Combine(_webHost.WebRootPath, src);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        product.ProductPicture.CopyTo(fileStream);
+                       
+                    }
+                     product.ImageURL = src;
+                }
                 await _services.CreatAsync(product);
                 return RedirectToAction(nameof(Index));
             }

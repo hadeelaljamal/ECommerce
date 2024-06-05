@@ -41,7 +41,10 @@
                         </button>
                     </form>
                     <ul class="navbar-nav mr-2">
+                        @if (Context.User.Identity.IsAuthenticated && User.IsInRole("Admin") || User.IsInRole("User"))
+                        {
                         @await Component.InvokeAsync("ShoppingCartSummary")
+                        }
                     </ul>
 
                     @*Partial View*@

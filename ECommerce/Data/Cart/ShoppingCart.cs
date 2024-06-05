@@ -1,6 +1,8 @@
-﻿using ECommerce.Models;
+﻿using ECommerce.Controllers;
+using ECommerce.Models;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,27 +16,38 @@ namespace ECommerce.Data.Cart
     public class ShoppingCart
     {
         private readonly ECommerceDbContext _context;
+
         public string ShoppingCartId { get; set; }
         public ShoppingCart(ECommerceDbContext context)
         {
             _context = context;
+           
         }
+
+        
+       
         public static ShoppingCart GetShoppingCart(IServiceProvider service)
         {
             var session = service.GetRequiredService<IHttpContextAccessor>().HttpContext.Session;
             var context = service.GetRequiredService<ECommerceDbContext>();
+            
             var cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
             session.SetString("CartId", cartId);
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
         //Get All Item in Shopping Cart
+        //public List<ShoppingCartItem> GetShoppingCartItems(string userId)
         public List<ShoppingCartItem> GetShoppingCartItems()
         {
+            ///return _context.ShoppingCartItems.Where(x => x.ShoppingCartId == ShoppingCartId && x.UserId == userId).Include(x => x.Product).ToList();
             return _context.ShoppingCartItems.Where(x => x.ShoppingCartId == ShoppingCartId).Include(x => x.Product).ToList();
+
+
         }
 
         //Calculate Total Amount in Shopping Cart Item
+        // public double GetShoppingCartTotal(string userId)
         public double GetShoppingCartTotal()
         {
             var total = _context.ShoppingCartItems.Where(x => x.ShoppingCartId == ShoppingCartId).Select(x => x.Product.Price * x.Amount).Sum();

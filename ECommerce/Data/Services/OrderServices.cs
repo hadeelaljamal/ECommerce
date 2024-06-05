@@ -50,5 +50,16 @@ namespace ECommerce.Data.Services
             }
             await _context.SaveChangesAsync();
         }
+
+        public async Task CancelOrder(string userId,int orderId)
+        {
+            var order = _context.Orders.Include(x => x.OrderItems).FirstOrDefault(x => x.Id == orderId);
+            if (order != null)
+            {
+                order.OrderStatus = Enums.OrderStatus.Canceled;
+                await _context.SaveChangesAsync();
+            }
+
+        }
     }
 }

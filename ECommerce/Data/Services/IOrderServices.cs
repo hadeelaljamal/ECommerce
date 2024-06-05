@@ -8,5 +8,6 @@ namespace ECommerce.Data.Services
     {
         Task StoreOrderAsync(List<ShoppingCartItem> items, string userId);
         Task<List<Order>> GetOrderAndRoleByUserIdAsync(string userId,string role);
+        Task CancelOrder(string userId, int orderId);
     }
 }

@@ -16,6 +16,8 @@
                     {
                     <th>User</th>
                     }
+                    <th>Order Status</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -43,6 +45,19 @@
                                 @item.User.FullName
                             </td>
                             }
+                            <td>@item.OrderStatus</td>
+
+                        @if (@item.OrderStatus.ToString()!="Canceled")
+                        {
+                            <td>
+                                <span>
+                                    <form asp-action="CancelOrder" asp-controller="Orders" asp-route-orderId="@item.Id">
+                                     <button type="submit" class="btn btn-danger">Cancle Order</button>
+                                    </form>
+                                </span>
+                            </td>
+                        }
+
                    </tr>
                    
                 }

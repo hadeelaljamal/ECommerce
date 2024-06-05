@@ -1,5 +1,6 @@
 ﻿using ECommerce.Data.Base;
 using ECommerce.Enums.Data;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,7 +21,6 @@ namespace ECommerce.Models
         [Required(ErrorMessage = "Price Is Required")]
         public double Price { get; set; }
 
-        [Required(ErrorMessage = "ImageURL Is Required")]
         public string ImageURL { get; set; }
 
         /*Since colors are something fixed and known that do not change,
@@ -35,5 +35,7 @@ namespace ECommerce.Models
         public int CategoryId { get; set; } //Foreign  Key
         [ForeignKey(nameof(CategoryId))] //[ForeignKey("CategoryId")] another way to write ForeignKey 
         public Category Category { get; set; }
+        [NotMapped]
+        public IFormFile ProductPicture { get; set; }
     }
 }
