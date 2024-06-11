@@ -44,6 +44,7 @@ namespace ECommerce
             services.AddScoped(x => ShoppingCart.GetShoppingCart(x));
             services.AddSession();
             services.AddScoped<IOrderServices, OrderServices>();
+            services.AddScoped<ShoppingCart>();
             //Identity
             services.AddIdentity<ApplicationUser,IdentityRole>()
                 .AddEntityFrameworkStores<ECommerceDbContext>();

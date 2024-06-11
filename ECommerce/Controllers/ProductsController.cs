@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.IO;
 using System.Linq;
@@ -21,17 +22,20 @@ namespace ECommerce.Controllers
         private readonly IProductServices _services;
         private readonly ICategoryServices _categoryServices;
         private readonly IWebHostEnvironment _webHost;
+        private readonly IWebHostEnvironment _environment; //to upload file
+
 
 
         //public ProductsController(ECommerceDbContext context)
         //{
         //    _context=context;
         //}
-        public ProductsController(IProductServices services, ICategoryServices categoryServices ,IWebHostEnvironment webHost)
+        public ProductsController(IProductServices services, ICategoryServices categoryServices ,IWebHostEnvironment webHost, IWebHostEnvironment environment)
         {
             _services = services;
             _categoryServices = categoryServices;
             _webHost = webHost;
+            _environment = environment;
         }
         /*public IActionResult Index()    //enhance this code its a Legacy code wich mean The request that is emitted will be one after the other
          / يعني الريكويست بتكون ورا بعض لما يوصلني الريسبونس بتنفذ الريكويست يلي بعده و هالشي بياخد وقت طويل لما يكون حجم الداتا عندي كبير /مش احسن شيء للبيرفورمنس
@@ -78,19 +82,38 @@ namespace ECommerce.Controllers
         {
            if(ModelState.IsValid)
             {
-                
-                if (product.ProductPicture != null)
+
+                if (product.ProductPicture == null || product.ProductPicture.Length == 0)
                 {
-                    var pictureName = $"{Guid.NewGuid()} - {product.ProductPicture.FileName}";
-                    var src = "/image/" + pictureName;
-                    var path = Path.Combine(_webHost.WebRootPath, src);
-                    using (var fileStream = new FileStream(path, FileMode.Create))
-                    {
-                        product.ProductPicture.CopyTo(fileStream);
-                       
-                    }
-                     product.ImageURL = src;
+                    throw new ArgumentException("File is invalid");
                 }
+                string uploadFolder = Path.Combine(_environment.WebRootPath, "image");
+                if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
+
+                string uniqueFileName = $"{Guid.NewGuid()} - {product.ProductPicture.FileName}";
+                string filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    product.ProductPicture.CopyTo(fileStream);
+                }
+                var src = "/image/" + uniqueFileName;
+                product.ImageURL = src;
+                //if (product.ProductPicture != null)
+                //{
+                //    var pictureName = $"{Guid.NewGuid()} - {product.ProductPicture.FileName}";
+                //    var src = "/image/" + pictureName;
+                //    var path = Path.Combine(_webHost.WebRootPath, src);
+                //    using (var fileStream = new FileStream(path, FileMode.Create))
+                //    {
+                //        product.ProductPicture.CopyTo(fileStream);
+
+                //    }
+                //    product.ImageURL = src;
+                //}
                 await _services.CreatAsync(product);
                 return RedirectToAction(nameof(Index));
             }
@@ -101,21 +124,49 @@ namespace ECommerce.Controllers
         {
             ViewBag.Category = await _categoryServices.GetAllAsync();
             var ProductId = await _services.GetByIdAsync(id, x => x.Category);
+            var product= await _services.GetByIdAsync(id) as Product;
+            var productpic= product.ProductPicture;
             return View(ProductId);
         }
         [HttpPost]
         public async Task<IActionResult> Edit(Product product)
         {
+
             if (ModelState.IsValid)
             {
+
+                if (product.ProductPicture == null || product.ProductPicture.Length == 0)
+                {
+
+                    await _services.UpdateAsync(product);
+                    return RedirectToAction(nameof(Index));
+                }
+                else { 
+                string uploadFolder = Path.Combine(_environment.WebRootPath, "image");
+                if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
+
+                string uniqueFileName = $"{Guid.NewGuid()} - {product.ProductPicture.FileName}";
+                string filePath = Path.Combine(uploadFolder, uniqueFileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    product.ProductPicture.CopyTo(fileStream);
+                }
+                var src = "/image/" + uniqueFileName;
+                product.ImageURL = src;
                 await _services.UpdateAsync(product);
                 return RedirectToAction(nameof(Index));
+                }
             }
-            return View(product);
+            return View("NotFound");
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id , Product product)
         {
+
           await  _services.DeleteAsync(id);
           return RedirectToAction(nameof(Index));
         }

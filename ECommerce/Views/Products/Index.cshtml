@@ -13,15 +13,25 @@
             <div class="card">
                 @if (Context.User.Identity.IsAuthenticated && User.IsInRole("Admin"))
                 {
+                    <div class="d-flex flex-row">
+                        <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">
+                            <i class="fas fa-regular fa-pencil ml-3 mt-2 mb-2"></i>
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id">
+                            <i id="trash" class="fas fa-regular fa-trash mr-3 mt-2 mb-2" value="Delete"
+                               onclick="return confirm('Are You Sure Want To Delete This Product?')"></i>
+                        </a>
 
-                    <a asp-action="Delete" asp-route-id="@item.Id">
+                    </div>
+
+                   @*  <a  asp-action="Delete" asp-route-id="@item.Id">
 
                         <input type="submit" value="Delete" class="btn btn-outline-danger"
                         onclick="return confirm('Are You Sure Want To Delete This Product?')" />
                     </a>
                     <a asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id">
-                        <i class="fas fa-regular fa-pencil"></i>
-                </a>
+                        <i class="fas fa-regular fa-pencil EditIcon" asp-action="Edit" asp-controller="Products" asp-route-id="@item.Id"></i>
+                </a> *@
                 }
                 @* <img src="@Url.Content(@item.ImageURL)" alt="@item.Name" style="width:90%;height:300px;"/>  this way is ok *@
                 <a asp-action="Details" asp-route-id="@item.Id">
@@ -36,10 +46,29 @@
                     <span class="ProColorDisplay">@item.ProductColor</span>
                 </p>
                 <p>@item.Category.Name</p>
-                <a class="btn btn-success" asp-controller="Orders" asp-action="AddToCart" asp-route-id="@item.Id">
+                @* <a id="addcart" class="btn" asp-controller="Orders" asp-action="AddToCart" asp-route-id="@item.Id">
                     <i class="fas fa-regular fa-shopping-basket mr-2"></i>
                     Add To Cart
-                </a>
+                </a> *@
+                @if (Context.User.Identity.IsAuthenticated)
+                {
+                    <a id="addcart" class="btn btn-info" asp-controller="Orders" asp-action="AddToCart" asp-route-id="@item.Id">
+                       
+                            <i class="fas fa-regular fa-shopping-basket mr-2"></i>
+                            Add To Cart
+                        
+                    </a>
+                }
+                else
+                {
+                    <a id="addcart" class="btn btn-info" asp-action="Login" asp-controller="Account">
+                        
+                            <i class="fas fa-regular fa-shopping-basket mr-2"></i>
+                            Add To Cart
+                        
+                    </a>
+
+                }
             </div>
         </div>
     }

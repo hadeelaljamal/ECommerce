@@ -31,9 +31,9 @@ namespace ECommerce.Controllers
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             
             //var item = _shoppingCart.GetShoppingCartItems(userId);
-            var item = _shoppingCart.GetShoppingCartItems();
+            var item = _shoppingCart.GetShoppingCartItems(userId);
             //ViewBag.Total = _shoppingCart.GetShoppingCartTotal(userId);
-            ViewBag.Total = _shoppingCart.GetShoppingCartTotal();
+            ViewBag.Total = _shoppingCart.GetShoppingCartTotal(userId);
             return View(item);
             
         }
@@ -59,8 +59,9 @@ namespace ECommerce.Controllers
 
         public async Task<IActionResult> CompleteOrder()
         {
-            var items = _shoppingCart.GetShoppingCartItems();
+            
             string userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var items = _shoppingCart.GetShoppingCartItems(userId);
             await _orderServices.StoreOrderAsync(items, userId);
             _shoppingCart.ClearShoppingCart();
             return View("CompleteOrder");

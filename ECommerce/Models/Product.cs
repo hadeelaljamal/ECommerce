@@ -1,6 +1,7 @@
 ﻿using ECommerce.Data.Base;
 using ECommerce.Enums.Data;
 using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,7 +36,13 @@ namespace ECommerce.Models
         public int CategoryId { get; set; } //Foreign  Key
         [ForeignKey(nameof(CategoryId))] //[ForeignKey("CategoryId")] another way to write ForeignKey 
         public Category Category { get; set; }
+
+
+        public ICollection<ShoppingCartItem> ShoppingCartItem { get; set; }
+
         [NotMapped]
+        
         public IFormFile ProductPicture { get; set; }
+
     }
 }

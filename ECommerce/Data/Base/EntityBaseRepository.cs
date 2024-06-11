@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using ECommerce.Data.Cart;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace ECommerce.Data.Base
     {
         private readonly ECommerceDbContext _context;
         private readonly DbSet<T> _entities;
-        public EntityBaseRepository(ECommerceDbContext context)
+        private readonly ShoppingCart _shoppingCart;
+        public EntityBaseRepository(ECommerceDbContext context )
         {
 
             _context = context;
             _entities = _context.Set<T>();
+           
     }
         public async Task CreatAsync(T entety)
         {
@@ -27,6 +30,7 @@ namespace ECommerce.Data.Base
 
         public async Task DeleteAsync(int id)
         {
+
             var entityId = await _entities.FirstOrDefaultAsync(x => x.Id == id);
             if (entityId != null)
             {
