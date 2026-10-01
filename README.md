@@ -1,44 +1,28 @@
-# Full-Stack E-Commerce Web Application
+# Real-World E-Commerce Application (.NET Core MVC)
 
-A robust, full-stack e-commerce application built using **ASP.NET Core Web API** and **Angular**. This project implements modern software architecture patterns, clean coding standards, and essential e-commerce features including product management, basket handling, order processing, and secure checkout.
+A full-featured, real-world E-Commerce web application built using **ASP.NET Core MVC**, **Entity Framework Core**, and **ASP.NET Core Identity**. The application demonstrates modern web development practices, clean architecture, and robust e-commerce features.
 
 ---
 
-## 🛠️ Tech Stack & Key Technologies
+## 🛠 Tech Stack & Key Technologies
 
-### **Backend (.NET Core API)**
-* **Framework:** ASP.NET Core Web API (C#)
-* **Architecture:** Clean Architecture & Repository Pattern with Unit of Work
-* **Database & ORM:** Entity Framework Core & SQL Server / SQLite
-* **Caching & In-Memory Store:** Redis (for high-performance shopping cart management)
-* **Authentication:** ASP.NET Core Identity & JWT (JSON Web Tokens)
-* **Payment Integration:** Stripe API integration
-* **Error Handling:** Global Error Handling Middleware & Standardized API Responses
-
-### **Frontend (Angular)**
-* **Framework:** Angular (TypeScript)
-* **State & UI:** RxJS, Reactive Forms, Ngx-Bootstrap / Angular Material
-* **HTTP Client:** Interceptors for JWT Tokens and Global Error Catching
-* **Routing:** Lazy Loading Modules, Route Guards for Protected Endpoints
+* **Framework:** ASP.NET Core MVC (.NET)
+* **Data Access & ORM:** Entity Framework Core & SQL Server
+* **Authentication & Authorization:** ASP.NET Core Identity (Role-based Authorization)
+* **Frontend:** Razor Views, HTML5, CSS3, Bootstrap, JavaScript / jQuery
+* **Architecture:** Repository Pattern & N-Tier / Layered Architecture
+* **Tools & Libraries:** AutoMapper, SweetAlert / Toastr notifications, Session & Cookie management
 
 ---
 
 ## ✨ Key Features & Functionality
 
-* 🔐 **User Authentication & Authorization:** Secure registration and login using JWTs and ASP.NET Identity.
-* 🛍️ **Product Catalog & Filtering:** Dynamic product listing with pagination, sorting, search, and filtering by brand or category.
-* 🛒 **High-Performance Shopping Basket:** Redis-backed transient shopping cart for fast operations.
-* 💳 **Checkout & Payment:** Seamless checkout process integrated with Stripe for secure online payments.
-* 📦 **Order Management:** Detailed order processing, tracking, and user order history.
-* 🛡️ **Robust Error Handling:** Custom middleware delivering standardized errors for client applications.
-
----
-
-## 📐 Architectural Highlights
-
-* **Specification Pattern:** Encapsulates query logic for clean, testable, and reusable database queries.
-* **Repository & Unit of Work Patterns:** Decouples data access logic from business operations.
-* **DTOs & AutoMapper:** Enforces data encapsulation between API endpoints and domain models.
+* 🔐 **User Authentication & Roles:** Secure Registration, Login, and Role-Based Access Control (Admin, Customer, etc.) using ASP.NET Core Identity.
+* 🛍 **Product & Category Management:** Full CRUD operations for products, categories, and cover types (Admin Panel).
+* 🛒 **Shopping Cart System:** Dynamic shopping cart management with session handling and database persistence.
+* 💳 **Checkout & Order Processing:** Complete order lifecycle management, status updates, and order summaries.
+* 👤 **User Profile & Order History:** Customers can view their order history and order details.
+* 🛡 **Data Validation & Security:** Client-side and server-side model validation, Anti-Forgery Tokens (CSRF protection).
 
 ---
 
@@ -46,50 +30,38 @@ A robust, full-stack e-commerce application built using **ASP.NET Core Web API**
 
 ### Prerequisites
 * [.NET SDK](https://dotnet.microsoft.com/download)
-* [Node.js & npm](https://nodejs.org/)
-* [Angular CLI](https://cli.angular.io/)
-* [Redis](https://redis.io/) (via Docker or local service)
+* [SQL Server](https://www.microsoft.com/en-us/sql-server/) / LocalDB
 
-### Backend Setup
-1. Clone the repository:
-```bash
-git clone https://github.com/hadeelaljamal/ECommerce.git
+### Installation & Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/hadeelaljamal/ECommerce.git
 ```
 
-2. Navigate to the API directory:
+2. Navigate to the project directory:
 ```
-cd API
+cd ECommerce
 ```
 
-3. Update database credentials in ⁠appsettings.json⁠ if necessary.
+3. Update Database Credentials:
+Check ⁠appsettings.json⁠ and update the ⁠DefaultConnection⁠ string to match your local SQL Server instance.
 
-4. Run EF Core migrations & database seed:
+4. Apply EF Core Migrations & Seed Database:
 ```
 dotnet ef database update
 ```
 
-5. Run the API:
+5. Run the Application:
 ```
 dotnet run
 ```
 
+6. Open your browser and navigate to ⁠https://localhost:5001⁠ or ⁠http://localhost:5000⁠.
 
-### Frontend Setup
-1. Navigate to the client directory:
-```
-cd client
-```
 
-2. Install npm packages:
-```
-npm install
-```
 
-3. Start the Angular development server:
-```
-ng serve
-```
 
-4. Open your browser and navigate to ⁠http://localhost:4200/⁠.
 
-   
+
+
