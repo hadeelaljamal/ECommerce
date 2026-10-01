@@ -52,5 +52,44 @@ A robust, full-stack e-commerce application built using **ASP.NET Core Web API**
 
 ### Backend Setup
 1. Clone the repository:
-   ```bash
-   git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
+```bash
+git clone https://github.com/hadeelaljamal/ECommerce.git
+```
+
+2. Navigate to the API directory:
+```
+cd API
+```
+
+3. Update database credentials in ⁠appsettings.json⁠ if necessary.
+
+4. Run EF Core migrations & database seed:
+```
+dotnet ef database update
+```
+
+5. Run the API:
+```
+dotnet run
+```
+
+
+### Frontend Setup
+1. Navigate to the client directory:
+```
+cd client
+```
+
+2. Install npm packages:
+```
+npm install
+```
+
+3. Start the Angular development server:
+```
+ng serve
+```
+
+4. Open your browser and navigate to ⁠http://localhost:4200/⁠.
+
+   
